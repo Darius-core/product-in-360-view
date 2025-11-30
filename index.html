@@ -104,6 +104,7 @@
     <!-- Viewer 360° -->
     <div class="viewer-card">
         <h2>Obróć i obejrzyj w 360°</h2>
+        <div id="loader" style="position:absolute; font-size:20px;">Ładowanie…</div>
         <div id="viewer"></div>
     </div>
 
@@ -139,7 +140,14 @@ $("#viewer").spritespin({
     animate: false,
     responsive: true,
     loop: true,
-    renderer: 'canvas'
+    renderer: 'canvas',
+    preloadCount: 12,
+    onProgress: function(e, data){
+        $("#loader").text("Ładowanie: " + Math.round(data.progress * 100) + "%");
+    },
+    onComplete: function(){
+        $("#loader").fadeOut();
+    }
 });
 </script>
 
